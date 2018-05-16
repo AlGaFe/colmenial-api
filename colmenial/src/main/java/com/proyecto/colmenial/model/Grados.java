@@ -1,8 +1,11 @@
 package com.proyecto.colmenial.model;
 
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
-import java.io.Serializable;
+
 import javax.persistence.*;
+import java.io.Serializable;
+import java.util.List;
+
 
 @Entity
 @Table(name = "grados")
@@ -15,6 +18,14 @@ public class Grados implements Serializable {
     private int id;
 
     private String nombre;
+
+    @ManyToMany
+    @JoinTable()
+    private List<Universidades> universidades;
+
+    @ManyToMany
+    @JoinTable()
+    private List<Asignaturas> asignaturas;
 
     public int getId() {
         return id;
@@ -30,5 +41,22 @@ public class Grados implements Serializable {
 
     public void setNombre(String nombre) {
         this.nombre = nombre;
+    }
+
+    public List<Universidades> getUniversidades() {
+        return universidades;
+    }
+
+    public void setUniversidades(List<Universidades> universidades) {
+        this.universidades = universidades;
+    }
+
+
+    public List<Asignaturas> getAsignaturas() {
+        return asignaturas;
+    }
+
+    public void setAsignaturas(List<Asignaturas> asignaturas) {
+        this.asignaturas = asignaturas;
     }
 }

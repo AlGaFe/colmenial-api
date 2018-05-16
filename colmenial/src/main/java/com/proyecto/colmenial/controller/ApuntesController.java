@@ -52,7 +52,6 @@ public class ApuntesController {
         apunte.setDescripcion(apunteDetails.getDescripcion());
         apunte.setAsignatura(apunteDetails.getAsignatura());
         apunte.setCreador(apunteDetails.getCreador());
-        apunte.setFecha(apunteDetails.getFecha());
         apunte.setPrecio(apunteDetails.getPrecio());
 
         Apuntes updatedApunte = apuntesRepository.save(apunte);

@@ -7,7 +7,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 import java.util.List;
-
+@CrossOrigin(origins = "*")
 @RestController
 @RequestMapping("/colmenial")
 public class AsignaturasController {
@@ -21,7 +21,6 @@ public class AsignaturasController {
 
     @PostMapping("/asignaturas")
     public Asignaturas createAsignatura(@Valid @RequestBody Asignaturas asignatura) {
-
         return asignaturasRepository.save(asignatura);
     }
 

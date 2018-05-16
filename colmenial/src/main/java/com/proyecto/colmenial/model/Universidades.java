@@ -4,6 +4,7 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 import org.springframework.web.bind.annotation.CrossOrigin;
 
 import java.io.Serializable;
+import java.util.List;
 import javax.persistence.*;
 @CrossOrigin(origins = "*")
 @Entity
@@ -16,6 +17,9 @@ public class Universidades implements Serializable {
     private int id;
 
     private String nombre;
+
+    @ManyToMany(mappedBy = "universidades")
+    private List<Grados> grados;
 
     public int getId() {
         return id;

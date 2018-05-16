@@ -3,6 +3,7 @@ package com.proyecto.colmenial.model;
 
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 import java.io.Serializable;
+import java.util.List;
 import javax.persistence.*;
 
 @Entity
@@ -13,6 +14,10 @@ public class Asignaturas implements Serializable {
     private String codigo;
 
     private String nombre;
+
+
+    @ManyToMany(mappedBy="asignaturas")
+    List<Grados> grados;
 
     public String getCodigo() {
         return codigo;
@@ -28,5 +33,13 @@ public class Asignaturas implements Serializable {
 
     public void setNombre(String nombre) {
         this.nombre = nombre;
+    }
+
+    public List<Grados> getGrados() {
+        return grados;
+    }
+
+    public void setGrados(List<Grados> grados) {
+        this.grados = grados;
     }
 }

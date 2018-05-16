@@ -1,39 +1,17 @@
-package com.proyecto.colmenial.model;
+package com.proyecto.colmenial.dto;
 
-        import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-        import org.hibernate.annotations.IndexColumn;
-        import org.springframework.data.annotation.CreatedDate;
-        import org.springframework.data.jpa.domain.support.AuditingEntityListener;
-        import java.io.Serializable;
-        import java.util.Date;
-        import javax.persistence.*;
-@Entity
-@Table(name = "apuntes")
-@EntityListeners(AuditingEntityListener.class)
-@JsonIgnoreProperties(value = {"fecha"}, allowGetters = true)
-public class Apuntes implements Serializable {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+
+import java.util.Date;
+
+public class ApuntesDTO {
     private int id;
-
     private String descripcion;
-
-    @Temporal(TemporalType.DATE)
-
     private Date fecha;
-
-    @ManyToOne
-    @JoinColumn
-    private Asignaturas asignatura;
-
+    private AsignaturasBasicDTO asignatura;
     private double precio;
-
     private int creador;
-
     private int valoracion;
-
     private String titulo;
-
     private String imagen;
 
     public int getId() {
@@ -60,11 +38,11 @@ public class Apuntes implements Serializable {
         this.fecha = fecha;
     }
 
-    public Asignaturas getAsignatura() {
+    public AsignaturasBasicDTO getAsignatura() {
         return asignatura;
     }
 
-    public void setAsignatura(Asignaturas asignatura) {
+    public void setAsignatura(AsignaturasBasicDTO asignatura) {
         this.asignatura = asignatura;
     }
 
@@ -105,6 +83,22 @@ public class Apuntes implements Serializable {
     }
 
     public void setImagen(String imagen) {
+        this.imagen = imagen;
+    }
+
+    public ApuntesDTO() {
+    }
+
+    public ApuntesDTO(int id, String descripcion, Date fecha, AsignaturasBasicDTO asignatura, double precio, int creador, int valoracion, String titulo, String imagen) {
+        super();
+        this.id = id;
+        this.descripcion = descripcion;
+        this.fecha = fecha;
+        this.asignatura = asignatura;
+        this.precio = precio;
+        this.creador = creador;
+        this.valoracion = valoracion;
+        this.titulo = titulo;
         this.imagen = imagen;
     }
 }
