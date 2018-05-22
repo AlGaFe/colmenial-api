@@ -22,13 +22,19 @@ public class Apuntes implements Serializable {
 
     private Date fecha;
 
-    @ManyToOne
-    @JoinColumn
-    private Asignaturas asignatura;
+    private String asignatura;
 
     private double precio;
 
     private int creador;
+
+    public String getAsignatura() {
+        return asignatura;
+    }
+
+    public void setAsignatura(String asignatura) {
+        this.asignatura = asignatura;
+    }
 
     private int valoracion;
 
@@ -58,14 +64,6 @@ public class Apuntes implements Serializable {
 
     public void setFecha(Date fecha) {
         this.fecha = fecha;
-    }
-
-    public Asignaturas getAsignatura() {
-        return asignatura;
-    }
-
-    public void setAsignatura(Asignaturas asignatura) {
-        this.asignatura = asignatura;
     }
 
     public double getPrecio() {

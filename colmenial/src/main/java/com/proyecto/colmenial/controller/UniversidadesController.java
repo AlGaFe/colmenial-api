@@ -28,7 +28,7 @@ public class UniversidadesController {
 
     @GetMapping("/universidades/{id}")
     public Universidades getUniversidadesById(@PathVariable(value = "id") int id) {
-        return universidadesRepository.findOne(id);
+        return universidadesRepository.findById(id);
     }
 
 

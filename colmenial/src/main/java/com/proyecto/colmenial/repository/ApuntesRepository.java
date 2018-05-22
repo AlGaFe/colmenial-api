@@ -11,6 +11,8 @@ import java.util.List;
 public interface ApuntesRepository extends JpaRepository<Apuntes, Integer> {
     public List<Apuntes> findByAsignatura(String asignatura);
     public Apuntes findById(int id);
+    public Apuntes findByTitulo(String titulo);
+    public List<Apuntes> findByCreador(int id);
 }
 
 

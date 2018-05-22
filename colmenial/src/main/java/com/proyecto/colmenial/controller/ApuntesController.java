@@ -1,42 +1,54 @@
 package com.proyecto.colmenial.controller;
 
+import com.proyecto.colmenial.dto.ApuntesDTO;
 import com.proyecto.colmenial.model.Apuntes;
-import com.proyecto.colmenial.model.Asignaturas;
 import com.proyecto.colmenial.repository.ApuntesRepository;
-import com.proyecto.colmenial.repository.AsignaturasRepository;
+import com.proyecto.colmenial.services.ApuntesServices;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
-import java.util.ArrayList;
 import java.util.List;
 @CrossOrigin(origins = "*")
 @RestController
 @RequestMapping("/colmenial")
 public class ApuntesController {
+
     @Autowired
     ApuntesRepository apuntesRepository;
+
     @Autowired
-    AsignaturasRepository asignaturasRepository;
+    ApuntesServices apuntesServices;
+
 
     @GetMapping("/apuntes")
-    public List<Apuntes> getAllApuntes() {
+    public List<ApuntesDTO> getAllApuntes() {
 
-        return apuntesRepository.findAll();
+        return apuntesServices.findAll();
     }
 
     @PostMapping("/apuntes")
     public Apuntes createApunte(@Valid @RequestBody Apuntes apunte) {
-
         return apuntesRepository.save(apunte);
     }
 
     @GetMapping("/apuntes/id/{id}")
-    public Apuntes getApunteById(@PathVariable(value = "id") int id) {
+    public ApuntesDTO getApunteById(@PathVariable(value = "id") int id) {
 
-        return apuntesRepository.findById(id);
+        return apuntesServices.findByID(id);
+    }
+
+    @GetMapping("/apuntes/titulo/{titulo}")
+    public ApuntesDTO getApunteById(@PathVariable(value = "titulo") String titulo) {
+
+        return apuntesServices.findByTitulo(titulo);
+    }
+
+    @GetMapping("/apuntes/creador/{id}")
+    public List<Apuntes> getApunteByCreador(@PathVariable(value = "id") int id) {
+        return apuntesRepository.findByCreador(id);
     }
 
     @GetMapping("/apuntes/asignatura/{codigo}")

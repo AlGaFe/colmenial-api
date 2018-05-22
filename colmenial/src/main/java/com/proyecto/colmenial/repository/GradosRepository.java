@@ -9,4 +9,6 @@ import java.util.List;
 @Repository
 public interface GradosRepository extends JpaRepository<Grados, Integer> {
     public Grados findById(int id);
+    public Grados findByNombre(String nombre);
+    public List<Grados> findByUniversidades_Id(int id);
 }

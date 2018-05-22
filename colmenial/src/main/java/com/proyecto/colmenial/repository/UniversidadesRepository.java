@@ -8,5 +8,5 @@ import java.util.List;
 
 @Repository
 public interface UniversidadesRepository extends JpaRepository<Universidades, Integer> {
-
+    public Universidades findById(int id);
 }

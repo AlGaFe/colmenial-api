@@ -21,12 +21,26 @@ public class UsuariosController {
     }
 
     @PostMapping("/usuarios")
-    public Usuarios createUsuarios(@Valid @RequestBody Usuarios usuario) {
-
-        return usuariosRepository.save(usuario);
+    public int createUsuarios(@Valid @RequestBody Usuarios usuario) {
+        List<Usuarios> usuarios = usuariosRepository.findAll();
+        for (int i = 0; i < usuarios.size(); i++) {
+            if (usuarios.get(i).getEmail().equals(usuario.getEmail())) {
+                return 0;
+            } else if (usuarios.get(i).getNombre().equals(usuario.getNombre())) {
+                return 1;
+            }
+        }
+            String preuba = "casa";
+            usuariosRepository.save(usuario);
+            return 2;
     }
 
-    @GetMapping("/usuarios/{nombre}")
+    @GetMapping("/usuarios/id/{id}")
+    public Usuarios findUsuariosById(@PathVariable(value = "id") int id) {
+        return usuariosRepository.findById(id);
+    }
+
+    @GetMapping("/usuarios/nombre/{nombre}")
     public List<Usuarios> findUsuariosByNombre(@PathVariable(value = "nombre") String id) {
         return usuariosRepository.findByNombre(id);
     }
@@ -46,8 +60,7 @@ public class UsuariosController {
 
     @DeleteMapping("/usuarios/{id}")
     public ResponseEntity<?> deleteUsuario(@PathVariable(value = "id") int id) {
-        Usuarios usuario = usuariosRepository.findOne(id);
-        usuariosRepository.delete(usuario);
+        usuariosRepository.delete(usuariosRepository.findById(id));
         return ResponseEntity.ok().build();
     }
 
