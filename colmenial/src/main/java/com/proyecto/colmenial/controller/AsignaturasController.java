@@ -26,7 +26,8 @@ public class AsignaturasController {
 
     @PostMapping("/asignaturas")
     public Asignaturas createAsignatura(@Valid @RequestBody Asignaturas asignatura) {
-        return asignaturasRepository.save(asignatura);
+
+        return asignaturasServices.addAsignaturas(asignatura);
     }
 
     @GetMapping("/asignaturas/codigo/{codigo}")

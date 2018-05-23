@@ -3,9 +3,11 @@ package com.proyecto.colmenial.config;
 import com.proyecto.colmenial.services.ApuntesServices;
 import com.proyecto.colmenial.services.AsignaturasServices;
 import com.proyecto.colmenial.services.GradosServices;
+import com.proyecto.colmenial.services.UsuariosServices;
 import com.proyecto.colmenial.services.impl.ApuntesServicesImpl;
 import com.proyecto.colmenial.services.impl.AsignaturasServicesImpl;
 import com.proyecto.colmenial.services.impl.GradosServiceImpl;
+import com.proyecto.colmenial.services.impl.UsuariosServicesImpl;
 import org.modelmapper.ModelMapper;
 import org.springframework.context.annotation.Bean;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
@@ -39,4 +41,7 @@ public class Configuration {
 
     @Bean
     public ApuntesServices getApuntesService(){return  new ApuntesServicesImpl(); }
+
+    @Bean
+    public UsuariosServices getUsuariosService(){return  new UsuariosServicesImpl(); }
 }

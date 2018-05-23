@@ -2,6 +2,7 @@ package com.proyecto.colmenial.controller;
 
 import com.proyecto.colmenial.model.Usuarios;
 import com.proyecto.colmenial.repository.UsuariosRepository;
+import com.proyecto.colmenial.services.UsuariosServices;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -15,25 +16,16 @@ public class UsuariosController {
     @Autowired
     UsuariosRepository usuariosRepository;
 
+    @Autowired
+    UsuariosServices usuariosServices;
+
     @GetMapping("/usuarios")
     public List<Usuarios> getAllUsuarios() {
         return usuariosRepository.findAll();
     }
 
     @PostMapping("/usuarios")
-    public int createUsuarios(@Valid @RequestBody Usuarios usuario) {
-        List<Usuarios> usuarios = usuariosRepository.findAll();
-        for (int i = 0; i < usuarios.size(); i++) {
-            if (usuarios.get(i).getEmail().equals(usuario.getEmail())) {
-                return 0;
-            } else if (usuarios.get(i).getNombre().equals(usuario.getNombre())) {
-                return 1;
-            }
-        }
-            String preuba = "casa";
-            usuariosRepository.save(usuario);
-            return 2;
-    }
+    public int createUsuarios(@Valid @RequestBody Usuarios usuario) {return usuariosServices.registrarUsuario(usuario);}
 
     @GetMapping("/usuarios/id/{id}")
     public Usuarios findUsuariosById(@PathVariable(value = "id") int id) {

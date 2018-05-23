@@ -1,8 +1,11 @@
 package com.proyecto.colmenial.services.impl;
 
 import com.proyecto.colmenial.dto.AsignaturasDTO;
+import com.proyecto.colmenial.dto.GradosBasicDTO;
 import com.proyecto.colmenial.model.Asignaturas;
+import com.proyecto.colmenial.model.Grados;
 import com.proyecto.colmenial.repository.AsignaturasRepository;
+import com.proyecto.colmenial.repository.GradosRepository;
 import com.proyecto.colmenial.services.AsignaturasServices;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +20,10 @@ public class AsignaturasServicesImpl implements AsignaturasServices {
 
     @Autowired
     AsignaturasRepository asignaturasRepository;
+
+    @Autowired
+    GradosRepository gradosRepository;
+
 
     @Override
     public AsignaturasDTO findByCodigo(String codigo) {
@@ -50,5 +57,16 @@ public class AsignaturasServicesImpl implements AsignaturasServices {
             asignaturasDTO.add(asignaturaDTO);
         }
         return asignaturasDTO;
+    }
+
+    @Override
+    public Asignaturas addAsignaturas(Asignaturas asignatura) {
+        for(Grados grado : asignatura.getGrados()){
+            System.out.print(grado.getId());
+          grado=gradosRepository.findById(grado.getId());
+          grado.getAsignaturas().add(asignatura);
+          gradosRepository.saveAndFlush(grado);
+        }
+        return  asignaturasRepository.save(asignatura);
     }
 }
